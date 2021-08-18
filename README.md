@@ -21,7 +21,7 @@ chmod +x xps-touchpad-config{,.desktop}
 
 5. Place `xps-touchpad-button-config.desktop` in `$HOME/.config/autostart`.
 
-6. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location 
+6. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
 
 # Notes
 The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the piped command substitution bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging.
