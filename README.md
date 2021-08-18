@@ -25,6 +25,12 @@ chmod +x xps-touchpad-config{,.desktop}
 
 7. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
 
+8. Once complete log out; then log back in and test:
+```
+[ebeale@nekko ~]$ xinput get-button-map 11
+1 0 3 4 5 6 7 
+```
+
 # Notes
 The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the [piped command substitution](https://mywiki.wooledge.org/CommandSubstitution) bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging <sup id="s1">[1](#f1)</sup>.
 
