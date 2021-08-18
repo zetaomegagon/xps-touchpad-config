@@ -1,5 +1,5 @@
 # Overview
-This method of configuring the Dell XPS 2021 touchpad buttons utilizes a bash script called `xps-touchpad-button-config` and a corresponding autostart file called `xps-touchpad-button-config.desktop`. In a desktiop environment like Gnome or KDE, which are aware of the [Freedesktop Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/), the correctly placed `*.desktop` file will trigger the script upon user login.
+This method of configuring the Dell XPS 2021 touchpad buttons utilizes a bash script called `xps-touchpad-button-config` and a corresponding autostart file called `xps-touchpad-button-config.desktop`. In a desktop environment like Gnome or KDE, which are aware of the [Freedesktop Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/), the correctly placed `*.desktop` file will trigger the script upon user login.
 
 # Instructions
 1. Make sure you are logged into GNOME using Xorg. You should be able to configure this on your login
@@ -24,7 +24,7 @@ chmod +x xps-touchpad-config{,.desktop}
 6. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
 
 # Notes
-The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the piped command substitution bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging.
+The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the piped command substitution bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging <sup id="s1">[1](#fi)</sup>.
 
 On thing that I may have not clarified enough is that this method modifies buttons on a physical device, where we shouldn't necessarily assume that any two devices that look the same are, in fact, the same. That being said, I derived the piped command substitution on my machine-- your's may differ.
 
@@ -36,7 +36,7 @@ In the event that this method doesn't work right away, please use a systematic a
 * make sure **both** the `*.desktop` **and** `script` files are executable
 
 #### The script
-Most likely any issue here is going to be with the piped command subsititution, re: `$(xinput list | command1 | command2 | commandN)`, where your system is different from mine. In this case, you should run each portion of the overall pipeline in that substitution on the command line to see the resulting output; then modify the script to your actual output.
+Most likely any issue here is going to be with the piped command subsititution, re: `$(xinput list | command1 | command2 | commandN)`, where your system is different from mine. In this case, you should run each portion of the overall pipeline in the substitution on the command line to see the resulting output; then modify the script to your actual output.
 
 For instance `xinput list --long | grep -i dll` returns the following for me:
 ```
@@ -47,3 +47,5 @@ For instance `xinput list --long | grep -i dll` returns the following for me:
 Normally, I'd show an example with just the first command run with it's output, but `xinit list --long` is too long an output, and I'm too lazy to copy-paste the proper section.
 
 Just make sure you are testing in an iterative manner, beginning with the first command in the pipe.
+
+<b id="s1">1</b> Actually, most of the comment is about bash in case you aren't familiar. See the comment for further debugging tips. [↩](#a1)
