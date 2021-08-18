@@ -5,9 +5,11 @@ This method of configuring the Dell XPS 2021 touchpad buttons utilizes a bash sc
 1. Make sure you are logged into GNOME using Xorg. You should be able to configure this on your login
 page by selecting `Gnome on Xorg` or similar.
 
-2. Set touchpad to use **Click Areas** in Gnome (dunno about KDE).
+2. The script depends on having `xinput` installed, see your distro docs or use your package manager search feature to find and install it; if it isn't installed.
 
-3. Make sure both files have the executable bit set:
+3. Set touchpad to use **Click Areas** in Gnome (dunno about KDE).
+
+4. Make sure both files have the executable bit set:
 ```
 ls -al xps-touch*
 
@@ -17,11 +19,11 @@ chmod +x xps-touchpad-config{,.desktop}
 ```
 (^ don't miss the comma)
 
-4. Place `xps-touchpad-button-config` in `$HOME/bin`, or somewhere else, but you will need to edit the corresponding `*.desktop` file to make it aware of the change.
+5. Place `xps-touchpad-button-config` in `$HOME/bin`, or somewhere else, but you will need to edit the corresponding `*.desktop` file to make it aware of the change.
 
-5. Place `xps-touchpad-button-config.desktop` in `$HOME/.config/autostart`.
+6. Place `xps-touchpad-button-config.desktop` in `$HOME/.config/autostart`.
 
-6. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
+7. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
 
 # Notes
 The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the piped command substitution bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging <sup id="s1">[1](#f1)</sup>.
