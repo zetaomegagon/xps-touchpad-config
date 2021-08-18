@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Touchpad Button Config
+Comment=Set touchpad button behaviors
+Exec=/home/ebeale/bin/touchpad-button-config
+Terminal=false
+X-GNOME-Autostart-enabled=true
+

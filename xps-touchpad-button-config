@@ -1,0 +1,63 @@
+#!/usr/bin/env -S bash -xe
+
+# Shebang line explanation...
+#
+# * '/usr/bin/env <shell_prog>' is the proper form for listing your interpreter
+# * 'env -S' allows passing multiple arguments to '/usr/bin/env'
+# * bash -xe
+#   + -e : exit on any error
+#   + -x : output every process step
+#
+# I enabled the above options for ease of debugging, but they shouldn't be
+# necessarily added to your shebang line as a general practive. See the below
+# docs from the BashGuide, defacto bash programming standard of the internet
+# and one true source (not even joking-- it's all you need.)
+#
+# - https://mywiki.wooledge.org/BashPitfalls#set_-euo_pipefail
+# - http://mywiki.wooledge.org/BashGuide/Practices#Activate_Bash.27s_Debug_Mode
+
+################################################################################################################
+##
+##                                       touchpad-button-config
+##
+## Set the emulated middle mouse button on a DELL XPS touchpad to a dummy value
+## this has the effect of sending a no-op for the emulated middle touchpad button.
+##
+## 1. Use the system grep command by defining a function grep
+##
+## 2. Get the device id of the touchpad
+##
+##  xinput list example:
+##
+##    "⎜↳ DLL0945:00 06CB:CDE6 Touchpad id=11 [slave pointer (2)]"
+##
+##  a. list the input devices
+##  b. filter on 'dll' then 'touchpad' from the returned output
+##  d. return the 6TH column of text -> (id=NN)
+##  e. replace 'id=' with nothing -> (NN)
+##
+## 3. Finally set the desired button mapping (you will need to determine what mapping is right for you)
+##    I arbitrarily subbed out "1 2 3 4 5 6 7" for "1 0 3 4 5 6 7", and that worked for me.
+##
+## To debug...
+##
+##       - interactively run this script from the command line.
+##       - interactively run steps A - E on the command line outside the script.
+##       - BashGuide: http://mywiki.wooledge.org/BashGuide/Practices#Debugging
+##
+##       [OPTIONAL] use shellcheck
+##         + ubuntu: https://packages.ubuntu.com/search?keywords=shellcheck&searchon=names
+##         + github: https://github.com/koalaman/shellcheck
+##         + web:    https://www.shellcheck.net/
+##
+## See also: https://wiki.archlinux.org/title/Libinput#Manual_button_re-mapping
+##
+################################################################################################################
+grep() { /usr/bin/grep -i "$@"; }
+
+ptrn1="dll"
+ptrn2="touchpad"
+
+dev_id="$(xinput list --long | grep "$ptrn1" | grep "$ptrn2" | awk '{ print $6 }' | sed 's/[=di]*//')"
+
+xinput set-button-map "$dev_id" 1 0 3 4 5 6 7
