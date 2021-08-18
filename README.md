@@ -48,4 +48,4 @@ Normally, I'd show an example with just the first command run with it's output, 
 
 Just make sure you are testing in an iterative manner, beginning with the first command in the pipe.
 
-<a id="f1">1</a> - Actually, most of the comment is about bash in case you aren't familiar. See the comment for further debugging tips. [↩](#s1)
+<a id="f1">[1]</a> - Actually, most of the comment is about bash in case you aren't familiar. See the comment for further debugging tips. [↩](#s1)
