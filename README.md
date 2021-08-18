@@ -26,7 +26,7 @@ chmod +x xps-touchpad-config{,.desktop}
 7. Edit the `*.desktop` file to have the `Exec` path reflect the `xps-touchpad-conf` script's actual location **and** your user name too!
 
 # Notes
-The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the piped command substitution bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging <sup id="s1">[1](#f1)</sup>.
+The actual script, while lightweight, has a lengthy comment. Mostly it details the behavior of the [piped command substitution](https://mywiki.wooledge.org/CommandSubstitution) bound to `$dev_id`, for those who may not be as familiar with bash and bash debugging <sup id="s1">[1](#f1)</sup>.
 
 On thing that I may have not clarified enough is that this method modifies buttons on a physical device, where we shouldn't necessarily assume that any two devices that look the same are, in fact, the same. That being said, I derived the piped command substitution on my machine-- your's may differ.
 
