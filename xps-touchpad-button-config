@@ -72,7 +72,7 @@
 ## similar, if not the same hardware. YMMV.
 ##
 ################################################################################################################
-grep() { /usr/bin/grep -i "$@"; }
+grep() { /usr/bin/grep -i "$1"; }
 
 ptrn1="dll"
 ptrn2="touchpad"
