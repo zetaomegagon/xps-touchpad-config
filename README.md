@@ -12,6 +12,8 @@ page by selecting `Gnome on Xorg` or similar.
 ls -al xps-touch*
 ...
 chmod +x xps-touchpad-config{,.desktop}
+
+(^ don't miss the comma)
 ```
 
 4. Place `xps-touchpad-button-config` in `$HOME/bin`, or somewhere else, but you will need to edit the corresponding `*.desktop` file to make it aware of the change.
