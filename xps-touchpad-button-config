@@ -1,17 +1,17 @@
 #!/usr/bin/env -S bash -xe
-
+ 
 # Shebang line explanation...
 #
-# * '/usr/bin/env <shell_prog>' is the proper form for listing your interpreter
-# * 'env -S' allows passing multiple arguments to '/usr/bin/env'
+# * `/usr/bin/env <shell_prog>` is the proper form for listing your interpreter
+# * `env -S` allows passing multiple arguments to `/usr/bin/env`
 # * bash -xe
 #   + -e : exit on any error
 #   + -x : output every process step
 #
 # I enabled the above options for ease of debugging, but they shouldn't be
-# necessarily added to your shebang line as a general practive. See the below
-# docs from the BashGuide, defacto bash programming standard of the internet
-# and one true source (not even joking-- it's all you need.)
+# necessarily added to your shebang line as a general practice. See the below
+# docs from the BashGuide which detail nuances and pitfalls of using `-xe` and
+# some other "sane defaults" you might hear about on the web.
 #
 # - https://mywiki.wooledge.org/BashPitfalls#set_-euo_pipefail
 # - http://mywiki.wooledge.org/BashGuide/Practices#Activate_Bash.27s_Debug_Mode
@@ -20,10 +20,17 @@
 ##
 ##                                       touchpad-button-config
 ##
-## Set the emulated middle mouse button on a DELL XPS touchpad to a dummy value
-## this has the effect of sending a no-op for the emulated middle touchpad button.
+## [Summary]
+##    
+## Set the emulated middle mouse button on a NEW (2021) DELL XPS (not developer edition[1]) touchpad to a
+## dummy value. Making the change has the effect of sending a no-op for the emulated middle touchpad button.
 ##
-## 1. Use the system grep command by defining a function grep
+## This script is executed by a corresponding `xps-touchpad-button-config.desktop` file, which conforms to the
+## XDG freedesktop standard.
+##
+## [Overview]
+##
+## 1. Use the system grep command by defining a function grep, and make it case insensetive
 ##
 ## 2. Get the device id of the touchpad
 ##
@@ -32,13 +39,20 @@
 ##    "⎜↳ DLL0945:00 06CB:CDE6 Touchpad id=11 [slave pointer (2)]"
 ##
 ##  a. list the input devices
-##  b. filter on 'dll' then 'touchpad' from the returned output
+##  b. filter on `dll` then `touchpad` from the returned output
 ##  d. return the 6TH column of text -> (id=NN)
-##  e. replace 'id=' with nothing -> (NN)
+##  e. replace `id=` with nothing -> (NN)
 ##
-## 3. Finally set the desired button mapping (you will need to determine what mapping is right for you)
-##    I arbitrarily subbed out "1 2 3 4 5 6 7" for "1 0 3 4 5 6 7", and that worked for me.
+## 3. Finally set the desired button mapping. You will need to determine what mapping is right for you by
+##    running...
 ##
+##    `xinput list` to get the device id; then `xinput get-button-map <device_id>` to see what the
+##    button mappings are.
+##
+##    I arbitrarily subbed out `1 2 3 4 5 6 7` for `1 0 3 4 5 6 7`, and that worked for me.
+##
+## [Notes]
+##  
 ## To debug...
 ##
 ##       - interactively run this script from the command line.
@@ -51,6 +65,11 @@
 ##         + web:    https://www.shellcheck.net/
 ##
 ## See also: https://wiki.archlinux.org/title/Libinput#Manual_button_re-mapping
+##
+## [Footnotes]
+##  
+## [1] -- I have the windows version, but am betting that the developer and windows editions use
+## similar, if not the same hardware. YMMV.
 ##
 ################################################################################################################
 grep() { /usr/bin/grep -i "$@"; }
